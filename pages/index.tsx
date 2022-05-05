@@ -11,9 +11,8 @@ type Player = {
 type PlayerProps = NonNullable<Player[]>;
 
 const Home: NextPage = () => {
-  const supabaseUrl = 'https://fysjbpwpllgjckgtvdqx.supabase.co'
-  const supabaseKey = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImZ5c2picHdwbGxnamNrZ3R2ZHF4Iiwicm9sZSI6ImFub24iLCJpYXQiOjE2NTE2MTU1NzYsImV4cCI6MTk2NzE5MTU3Nn0.o-Sduy_k_ck7I-tRcdxG9PERpnQlA0ai6ch1pdP4BzE'
-  //const supabaseKey = process.env.SUPABASE_KEY
+  const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL
+  const supabaseKey = process.env.NEXT_PUBLIC_SUPABASE_KEY
   const supabase = createClient(supabaseUrl, supabaseKey)
   
   // 外野手
@@ -80,6 +79,7 @@ const Home: NextPage = () => {
             defaultValue="--"
             onChange={(e) => handleChange(e)}
           >
+            <option value="" className="text-black">選手を選択</option>
             {playerData.map((player)=> (
               <option value={player.name} className="text-black" key={player.id}>{player.name}/打率{player.result}</option>
             ))}
@@ -100,6 +100,7 @@ const Home: NextPage = () => {
             defaultValue="--"
             onChange={(e) => handleThirdChange(e)}
           >
+            <option value="" className="text-black">選手を選択</option>
             {thirdPlayerData.map((thirdPlayer)=> (
               <option value={thirdPlayer.name} className="text-black" key={thirdPlayer.id}>{thirdPlayer.name}/打率{thirdPlayer.result}</option>
             ))}
@@ -120,6 +121,7 @@ const Home: NextPage = () => {
             defaultValue="--"
             onChange={(e) => handleShortChange(e)}
           >
+            <option value="" className="text-black">選手を選択</option>
             {shortPlayerData.map((shortPlayer)=> (
               <option value={shortPlayer.name} className="text-black" key={shortPlayer.id}>{shortPlayer.name}/打率{shortPlayer.result}</option>
             ))}
@@ -140,6 +142,7 @@ const Home: NextPage = () => {
             defaultValue="--"
             onChange={(e) => handleSecondChange(e)}
           >
+            <option value="" className="text-black">選手を選択</option>
             {secondPlayerData.map((secondPlayer)=> (
               <option value={secondPlayer.name} className="text-black" key={secondPlayer.id}>{secondPlayer.name}/打率{secondPlayer.result}</option>
             ))}
