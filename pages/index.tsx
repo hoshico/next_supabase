@@ -1,6 +1,8 @@
-import type { NextPage } from 'next'
+import type { GetServerSideProps, NextPage } from 'next'
 import { createClient } from '@supabase/supabase-js'
 import { useEffect, useState } from 'react'
+import { supabase } from '../libs/supabaseClient';
+import Image from 'next/image';
 
 type Player = {
   id: number;
@@ -10,11 +12,18 @@ type Player = {
 
 type PlayerProps = NonNullable<Player[]>;
 
-const Home: NextPage = () => {
-  const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL
-  const supabaseKey = process.env.NEXT_PUBLIC_SUPABASE_KEY
-  const supabase = createClient(supabaseUrl, supabaseKey)
-  
+export const getServerSideProps: GetServerSideProps = async () => {
+  const { publicURL } = supabase.storage
+    .from('mlb-pic')
+    .getPublicUrl("betts.jpg");
+    return {
+      props: {
+        url: publicURL,
+      }
+    }
+}
+
+const Home: NextPage = (props) => {
   // 外野手
   const [ playerData, setPlayerData ] = useState<PlayerProps>([]);
   const [ selectPlayer, setSelectPlayer ] = useState<string>();
