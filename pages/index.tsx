@@ -61,55 +61,13 @@ const Home: NextPage<{data: Array<Player>}> = (props) => {
     //setPlayerImgUrl(e.target.dataset.url)
   };
   
- 
-  useEffect(() => {
-    const getPlayData = async() => {
-      // 外野手
-      let { data: player }: { data:any } = await supabase.from('player').select().eq('position','外野')
-      // 三塁手
-      //let { data: thirdPlayer }: { data:any } = await supabase.from('player').select().eq('position','三塁')
-      // 遊撃手
-      //let { data: shortPlayer }: { data:any } = await supabase.from('player').select().eq('position','遊撃')
-      // 二塁手
-      //let { data: secondPlayer }: { data:any } = await supabase.from('player').select().eq('position','二塁')
-      // 一塁手
-      //let { data: firstPlayer }: { data:any } = await supabase.from('player').select().eq('position','一塁')
-      setPlayerData(player)
- 
-    }
-    getPlayData();
-  },[])
   return (
     <>
       <div className="bg-gray-200 min-h-screen">
-        <div className="w-4/5 mx-auto pt-48 ">
-          {/*外野手*/}
-          <div className="mt-8 w-1/5 mx-auto outfield grid grid-cols-1">
-            <div className="mt-14 w-full">
-              <div className="w-30 h-60 relative">
-                {!playerImgUrl ? null : 
-                  <Image 
-                  alt=''
-                  src={playerImgUrl}
-                  layout='fill'
-                  objectFit='cover'
-                  className='block group-hover:opacity-75'
-                />}
-              </div>
-              <div className="dropdown">
-                <label tabIndex={0} className="btn m-1 px-6">外野手</label>
-                {/*<ul tabIndex={0} className="dropdown-content menu p-2 shadow bg-base-100 w-60">
-                  {playerData.map((player) => (
-                    <li className='mb-2 p-4 cursor-pointer hover:bg-white' key={player.id} data-url={player.imageSrc} onClick={selectPlayerList}>{player.name}</li>
-                  ))}
-                </ul>*/}
-              </div>
-              
-              <div className="result mt-5">
-                <p>スタメン:{selectPlayer}</p>
-              </div>
-            </div>
-          </div>
+        <div className="">
+          {outFieldPlayers.map((outFieldPlayer, index) => (
+            <p key={index}>{outFieldPlayer.name}</p> 
+          ))}
         </div>
       </div>
     </>
