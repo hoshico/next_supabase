@@ -13,12 +13,6 @@ type Player = {
   name: string;
   position: string;
 }
-avg: "300"
-hr: "30"
-id: 5
-image: null
-name: "ソト"
-position: "外野手"
 //type PlayerProps = NonNullable<Player[]>;
 
 /*
