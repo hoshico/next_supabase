@@ -31,7 +31,8 @@ export const getStaticProps: GetStaticProps = async () => {
 
 const Home: NextPage<{data: Array<Player>}> = (props) => {
   const { data } = props;
-
+  //console.log(data)
+  const [ selectOutFieldPlayer, setSelectOutPlayerList] = useState<Player | null>();
   // 外野手データ
   const outFieldPlayers = data.filter((player) => player.position === "外野手");
   
@@ -43,15 +44,12 @@ const Home: NextPage<{data: Array<Player>}> = (props) => {
   const secondBasemanPlayers = data.filter((player) => player.position === "二塁手");
   // 一塁手
   const firstBasemanPlayers = data.filter((player) => player.position === "一塁手");
+  
+  // 捕手
+  const catcherBasemanPlayers = data.filter((player) => player.position === "捕手");
 
   // 指名打者
   const designatedHitterPlayers = data.filter((player) => player.position === "指名打者");
-
-
-  // 外野手
-  const [ playerData, setPlayerData ] = useState<Player[]>([]);
-  const [ selectPlayer, setSelectPlayer ] = useState<string>();
-  const [ playerImgUrl, setPlayerImgUrl ] = useState<string>();
  
  
   // 05/08追加 ドロップダウン
@@ -60,14 +58,22 @@ const Home: NextPage<{data: Array<Player>}> = (props) => {
     //console.log(e.target.dataset.url)
     //setPlayerImgUrl(e.target.dataset.url)
   };
+
+  const selectedPlayer = (player: Player) => {
+    setSelectOutPlayerList(player);
+  };
   
   return (
     <>
       <div className="bg-gray-200 min-h-screen">
-        <div className="">
-          {outFieldPlayers.map((outFieldPlayer, index) => (
-            <p key={index}>{outFieldPlayer.name}</p> 
-          ))}
+        <div className="dropdown dropdown-hover">
+          <p>{selectOutFieldPlayer ? selectOutFieldPlayer.name : "選択してください"}</p>
+          <label tabIndex={0} className="btn m-1">外野手</label>
+            <ul tabIndex={0} className="dropdown-content menu p-2 shadow bg-base-100 rounded-box w-52">
+            {outFieldPlayers.map((outFieldPlayer, index) => (
+              <li className='cursor-pointer hover:bg-rose-200' key={index} onClick={() => selectedPlayer(outFieldPlayer)}>{outFieldPlayer.name}</li>
+            ))}
+            </ul>
         </div>
       </div>
     </>
