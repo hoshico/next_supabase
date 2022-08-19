@@ -31,11 +31,14 @@ export const getStaticProps: GetStaticProps = async () => {
 
 const Home: NextPage<{data: Array<Player>}> = (props) => {
   const { data } = props;
-  //console.log(data)
+  // 外野手state
   const [ selectOutFieldPlayer, setSelectOutPlayerList] = useState<Player | null>();
+  // 三塁手state
+  const [ selectThirdPlayer, setSelectThirdPlayerList] = useState<Player | null>();
+  
+  
   // 外野手データ
   const outFieldPlayers = data.filter((player) => player.position === "外野手");
-  
   // 三塁手
   const thirdBasemanPlayers = data.filter((player) => player.position === "三塁手");
   // 遊撃手
@@ -62,20 +65,33 @@ const Home: NextPage<{data: Array<Player>}> = (props) => {
   const selectedPlayer = (player: Player) => {
     setSelectOutPlayerList(player);
   };
+  const selectedThirdPlayer = (player: Player) => {
+    setSelectThirdPlayerList(player);
+  };
+
   
   return (
     <>
-      <div className="bg-gray-200 min-h-screen">
+      <div className="bg-gray-200 min-h-screen ">
         <div className="dropdown dropdown-hover">
           <p>{selectOutFieldPlayer ? selectOutFieldPlayer.name : "選択してください"}</p>
           <label tabIndex={0} className="btn m-1">外野手</label>
-            <ul tabIndex={0} className="dropdown-content menu p-2 shadow bg-base-100 rounded-box w-52">
+            <ul tabIndex={0} className="dropdown-content menu p-2 shadow bg-base-100 w-52">
             {outFieldPlayers.map((outFieldPlayer, index) => (
-              <li className='cursor-pointer hover:bg-rose-200' key={index} onClick={() => selectedPlayer(outFieldPlayer)}>{outFieldPlayer.name}</li>
+              <li className='cursor-pointer hover:bg-gray-200' key={index} onClick={() => selectedPlayer(outFieldPlayer)}>{outFieldPlayer.name}</li>
             ))}
             </ul>
         </div>
-      </div>
+        <div className="dropdown dropdown-hover">
+          <p>{selectThirdPlayer ? selectThirdPlayer.name : "選択してください"}</p>
+          <label tabIndex={0} className="btn m-1">三塁手</label>
+            <ul tabIndex={0} className="dropdown-content menu p-2 shadow bg-base-100 w-52">
+            {thirdBasemanPlayers.map((thirdBasemanPlayer, index) => (
+              <li className='cursor-pointer hover:bg-gray-200' key={index} onClick={() => selectedThirdPlayer(thirdBasemanPlayer)}>{thirdBasemanPlayer.name}</li>
+            ))}
+            </ul>
+        </div>
+      </div>  
     </>
   )
 }
