@@ -30,6 +30,7 @@ export const getStaticProps: GetStaticProps = async () => {
 }
 
 const Home: NextPage<{data: Array<Player>}> = (props) => {
+
   const { data } = props;
   // スタメンstate
   const [ member, setMember ] = useState<Array<Player>>([]);
