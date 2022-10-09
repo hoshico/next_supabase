@@ -31,6 +31,11 @@ export const getStaticProps: GetStaticProps = async () => {
 
 const Home: NextPage<{data: Array<Player>}> = (props) => {
   const { data } = props;
+  // スタメンstate
+  const [ member, setMember ] = useState<Array<Player>>([]);
+  // スタメン決定state
+  const [ selectedMember, setSelectedMember ] = useState(false);
+
   // 外野手state
   const [ selectOutFieldPlayer, setSelectOutPlayerList] = useState<Player | null>();
   // 三塁手state
@@ -69,6 +74,16 @@ const Home: NextPage<{data: Array<Player>}> = (props) => {
     setSelectThirdPlayerList(player);
   };
 
+  // スタメン決定ボタン
+  const onDecision = () => {
+    // 各メンバーが選ばれている場合
+    if(selectOutFieldPlayer && selectThirdPlayer) {
+      const newMember = [selectOutFieldPlayer,selectThirdPlayer];
+      setMember(newMember);
+      setSelectedMember(true);
+    }
+  }
+
   
   return (
     <>
@@ -90,6 +105,15 @@ const Home: NextPage<{data: Array<Player>}> = (props) => {
               <li className='cursor-pointer hover:bg-gray-200' key={index} onClick={() => selectedThirdPlayer(thirdBasemanPlayer)}>{thirdBasemanPlayer.name}</li>
             ))}
             </ul>
+        </div>
+        {/*スタメン決定ボタン*/}
+        <button onClick={onDecision}>スタメン決定</button>
+        {/*スタメン表示*/}
+        <div className=''>
+          <p>スタメン</p>
+          {selectedMember && member.map((player) => (
+            <p key={player.id}>{player.name}</p>
+          ))}
         </div>
       </div>  
     </>
