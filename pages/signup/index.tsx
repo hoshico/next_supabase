@@ -10,8 +10,8 @@ const Signup = () => {
 
   // loginボタン
   const onLogin = async(data: any) => {
-    const res = await supabase.auth.signUp(data);
-    console.log(res)
+    const { user, error } = await supabase.auth.signUp(data);
+    setUser(user);
   };
   return (
     <section className="h-full gradient-form bg-gray-200 md:h-screen">
