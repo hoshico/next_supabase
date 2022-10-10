@@ -3,6 +3,10 @@ import { createClient } from '@supabase/supabase-js'
 import { useEffect, useState } from 'react'
 import { supabase } from '../libs/supabaseClient';
 import Image from 'next/image';
+import { useSelector } from 'react-redux';
+import { selectUser } from '../libs/userSlice';
+import { useDispatch } from 'react-redux';
+import Auth from '../components/Auth';
 
 
 type Player = {
@@ -27,9 +31,11 @@ export const getStaticProps: GetStaticProps = async () => {
         data: player,
       }
     }
-}
+};
 
 const Home: NextPage<{data: Array<Player>}> = (props) => {
+  const user = useSelector(selectUser);
+  const dispatch = useDispatch();
 
   const { data } = props;
   // スタメンstate
@@ -88,35 +94,41 @@ const Home: NextPage<{data: Array<Player>}> = (props) => {
   
   return (
     <>
-      <div className="bg-gray-200 min-h-screen ">
-        <div className="dropdown dropdown-hover">
-          <p>{selectOutFieldPlayer ? selectOutFieldPlayer.name : "選択してください"}</p>
-          <label tabIndex={0} className="btn m-1">外野手</label>
-            <ul tabIndex={0} className="dropdown-content menu p-2 shadow bg-base-100 w-52">
-            {outFieldPlayers.map((outFieldPlayer, index) => (
-              <li className='cursor-pointer hover:bg-gray-200' key={index} onClick={() => selectedPlayer(outFieldPlayer)}>{outFieldPlayer.name}</li>
+    {user.uid ? (
+      <>
+        <div className="bg-gray-200 min-h-screen ">
+          <div className="dropdown dropdown-hover">
+            <p>{selectOutFieldPlayer ? selectOutFieldPlayer.name : "選択してください"}</p>
+            <label tabIndex={0} className="btn m-1">外野手</label>
+              <ul tabIndex={0} className="dropdown-content menu p-2 shadow bg-base-100 w-52">
+              {outFieldPlayers.map((outFieldPlayer, index) => (
+                <li className='cursor-pointer hover:bg-gray-200' key={index} onClick={() => selectedPlayer(outFieldPlayer)}>{outFieldPlayer.name}</li>
+              ))}
+              </ul>
+          </div>
+          <div className="dropdown dropdown-hover">
+            <p>{selectThirdPlayer ? selectThirdPlayer.name : "選択してください"}</p>
+            <label tabIndex={0} className="btn m-1">三塁手</label>
+              <ul tabIndex={0} className="dropdown-content menu p-2 shadow bg-base-100 w-52">
+              {thirdBasemanPlayers.map((thirdBasemanPlayer, index) => (
+                <li className='cursor-pointer hover:bg-gray-200' key={index} onClick={() => selectedThirdPlayer(thirdBasemanPlayer)}>{thirdBasemanPlayer.name}</li>
+              ))}
+              </ul>
+          </div>
+          {/*スタメン決定ボタン*/}
+          <button onClick={onDecision}>スタメン決定</button>
+          {/*スタメン表示*/}
+          <div className=''>
+            <p>スタメン</p>
+            {selectedMember && member.map((player) => (
+              <p key={player.id}>{player.name}</p>
             ))}
-            </ul>
-        </div>
-        <div className="dropdown dropdown-hover">
-          <p>{selectThirdPlayer ? selectThirdPlayer.name : "選択してください"}</p>
-          <label tabIndex={0} className="btn m-1">三塁手</label>
-            <ul tabIndex={0} className="dropdown-content menu p-2 shadow bg-base-100 w-52">
-            {thirdBasemanPlayers.map((thirdBasemanPlayer, index) => (
-              <li className='cursor-pointer hover:bg-gray-200' key={index} onClick={() => selectedThirdPlayer(thirdBasemanPlayer)}>{thirdBasemanPlayer.name}</li>
-            ))}
-            </ul>
-        </div>
-        {/*スタメン決定ボタン*/}
-        <button onClick={onDecision}>スタメン決定</button>
-        {/*スタメン表示*/}
-        <div className=''>
-          <p>スタメン</p>
-          {selectedMember && member.map((player) => (
-            <p key={player.id}>{player.name}</p>
-          ))}
-        </div>
-      </div>  
+          </div>
+        </div>  
+      </>
+    ): (
+      <Auth />
+    )}
     </>
   )
 }
