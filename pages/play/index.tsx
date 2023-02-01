@@ -7,26 +7,26 @@ import { Order } from '../../features/order';
   最初にsupabaseから全てのデータを取得する
 */
 export const getStaticProps: GetStaticProps = async () => {
-  let { data: player } = await supabase
+  let { data: players } = await supabase
   .from('player')
   .select('*');
 
   return {
     props: {
-      data: player,
+      players,
     }
   }
 };
 
 interface Props {
-  data: any[];
+  players: any[];
 }
 
 const PlayPage: NextPage<Props> = (props) => {
 
   return (
     <>
-    <Order data={props.data} />
+    <Order players={props.players} />
     </>
   )
 };
