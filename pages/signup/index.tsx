@@ -1,5 +1,6 @@
 import { useForm, Controller } from "react-hook-form";
 import { supabase } from "../../libs/supabaseClient";
+import { selectUser } from "../../libs/userSlice";
 
 type FormData = {
   email: string;
@@ -11,7 +12,7 @@ const Signup = () => {
   // loginボタン
   const onLogin = async(data: any) => {
     const { user, error } = await supabase.auth.signUp(data);
-    setUser(user);
+    //selectUser(user)
   };
   return (
     <section className="h-full gradient-form bg-gray-200 md:h-screen">
