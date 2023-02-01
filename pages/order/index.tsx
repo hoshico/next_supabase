@@ -1,11 +1,29 @@
-import { NextPage } from 'next';
+import { GetStaticProps, NextPage } from 'next';
+import { supabase } from '../../libs/supabaseClient';
 import { useForm } from 'react-hook-form';
 
-interface Props {
+/*
+  最初にsupabaseから全てのデータを取得する
+*/
+export const getStaticProps: GetStaticProps = async () => {
+  let { data: player, error } = await supabase
+  .from('player')
+  .select('*')
+    return {
+      props: {
+        data: player,
+      }
+    }
+};
 
+interface Props {
+  data: any;
 }
 
-const OrderPage: NextPage<Props> = () => {
+const OrderPage: NextPage<Props> = (props) => {
+  const {data} = props;
+  console.log(data);
+  
   const {register, handleSubmit, formState: {isDirty, dirtyFields}} = useForm({
     defaultValues: {
       firstPlayer: "",
