@@ -8,14 +8,7 @@ export const Order = (props: any) => {
    * players情報から
    */
   const { filterPlayers } = uesFilter();
-  const data = filterPlayers(players);
-  console.log(data);
-
-  //const outFieldPlayers = players.filter((player:any) => {
-  //  return player.position === '外野手'
-  //})
-  //console.log(outFieldPlayers);
-
+  const selectedPositionData = filterPlayers(players);
 
   const {register, handleSubmit, formState: {isDirty, dirtyFields}} = useForm({
     defaultValues: {
