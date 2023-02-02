@@ -22,7 +22,8 @@
     "react-hook-form": "^7.37.0",
     "react-redux": "^8.0.4",
     "redux-thunk": "^2.4.1",
-    "redux-typescript": "^1.2.1"
+    "redux-typescript": "^1.2.1",
+    "swr": "^2.0.3"
   },
   "devDependencies": {
     "@types/node": "17.0.31",
