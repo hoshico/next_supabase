@@ -4,7 +4,7 @@ const PositionSelect = (props: any): JSX.Element => {
   const { players, label } = props;
   const { register } = useFormContext();
   return (
-    <div className='m-4'>
+    <div className='p-4 hover:bg-gray-200'>
       <div>
         <label>{label}</label>
       </div>

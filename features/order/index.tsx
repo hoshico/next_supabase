@@ -13,7 +13,9 @@ const Order = (props: any) => {
 
   const useFormMethods = useForm({
     defaultValues: {
-      firstPlayer: '',
+      外野手: '',
+      三塁手: '',
+      遊撃手: '',
     },
   });
   const { handleSubmit } = useFormMethods;
@@ -26,10 +28,24 @@ const Order = (props: any) => {
       <div className='mx-10 w-48 bg-white'>
         <form onSubmit={handleSubmit(onSubmit)}>
           {/*外野手*/}
-          <div>
+          <div className=''>
             <PositionSelect
               label='外野手'
               players={selectedPositionData.outFielder}
+            />
+          </div>
+          {/*三塁手*/}
+          <div className=''>
+            <PositionSelect
+              label='三塁手'
+              players={selectedPositionData.thirdFielder}
+            />
+          </div>
+          {/*外野手*/}
+          <div className=''>
+            <PositionSelect
+              label='遊撃手'
+              players={selectedPositionData.shortFielder}
             />
           </div>
           <button type='submit'>決定</button>

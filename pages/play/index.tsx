@@ -22,7 +22,7 @@ interface Props {
 
 const PlayPage: NextPage<Props> = (props) => {
   return (
-    <div className='w-100'>
+    <div className='bg-gradient-to-r from-yellow-500 to-black-500'>
       <Order players={props.players} />
     </div>
   );
