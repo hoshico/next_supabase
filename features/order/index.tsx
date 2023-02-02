@@ -3,6 +3,9 @@ import { useForm } from "react-hook-form";
 export const Order = (props: any) => {
   const { players } = props;
   
+  /**
+   * players情報から
+   */
   const outFieldPlayers = players.filter((player:any) => {
     return player.position === '外野手'
   })
@@ -22,13 +25,13 @@ export const Order = (props: any) => {
       <div>
 
       </div>
-    {/*<form onSubmit={handleSubmit(onSubmit)}>
+    <form onSubmit={handleSubmit(onSubmit)}>
       <select>
-        <option>ddd</option>
-        <option>ddd</option>
-        <option>ddd</option>
+      {outFieldPlayers.map((outFieldPlayer: any) => {
+        <option key={outFieldPlayer.name}>{outFieldPlayer.name}</option>
+      }) }
       </select>
-    </form>*/}
+    </form>
   </div>
   )
 };
