@@ -1,4 +1,5 @@
 import { useForm } from "react-hook-form";
+import { uesFilter } from "./useFilter";
 
 export const Order = (props: any) => {
   const { players } = props;
@@ -6,10 +7,14 @@ export const Order = (props: any) => {
   /**
    * players情報から
    */
-  const outFieldPlayers = players.filter((player:any) => {
-    return player.position === '外野手'
-  })
-  console.log(outFieldPlayers);
+  const { filterPlayers } = uesFilter();
+  const data = filterPlayers(players);
+  console.log(data);
+
+  //const outFieldPlayers = players.filter((player:any) => {
+  //  return player.position === '外野手'
+  //})
+  //console.log(outFieldPlayers);
 
 
   const {register, handleSubmit, formState: {isDirty, dirtyFields}} = useForm({
@@ -26,11 +31,11 @@ export const Order = (props: any) => {
 
       </div>
     <form onSubmit={handleSubmit(onSubmit)}>
-      <select>
+      {/*<select>
       {outFieldPlayers.map((outFieldPlayer: any) => {
         <option key={outFieldPlayer.name}>{outFieldPlayer.name}</option>
       }) }
-      </select>
+      </select>*/}
     </form>
   </div>
   )
