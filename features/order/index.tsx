@@ -1,7 +1,8 @@
 import { useForm } from "react-hook-form";
+import PositionSelect from "./PositionSelect";
 import { uesFilter } from "./useFilter";
 
-export const Order = (props: any) => {
+const Order = (props: any) => {
   const { players } = props;
   
   /**
@@ -24,12 +25,13 @@ export const Order = (props: any) => {
 
       </div>
     <form onSubmit={handleSubmit(onSubmit)}>
-      {/*<select>
-      {outFieldPlayers.map((outFieldPlayer: any) => {
-        <option key={outFieldPlayer.name}>{outFieldPlayer.name}</option>
-      }) }
-      </select>*/}
+      {/*外野手*/}
+      <div>
+        <PositionSelect players={selectedPositionData.outFielder}/>
+      </div>
     </form>
   </div>
   )
 };
+
+export default Order;
