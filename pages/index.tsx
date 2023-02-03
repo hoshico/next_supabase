@@ -1,30 +1,51 @@
-import { Session, User } from '@supabase/supabase-js';
-import type { NextPage } from 'next'
-import { useEffect, useState } from 'react'
-import Auth from '../components/Auth';
-import { supabase } from '../libs/supabaseClient';
+import type { NextPage } from 'next';
+import Router from 'next/router';
+import { useForm } from 'react-hook-form';
+import { useRecoilState } from 'recoil';
+import { InputFormType, inputState } from '../states/atoms/inputAtom';
 
 const Home: NextPage = () => {
-  const [session, setSession] = useState<Session | null>(null);
-  const [user, setUser] = useState<User | null>(null)
+  const [input, setInput] = useRecoilState(inputState);
 
-  useEffect(() => {
-    //setSession(supabase.auth.session());
-    //supabase.auth.onAuthStateChange((_event, session) => {
-    //  setSession(session);
-    //})
-    const user = supabase.auth.user();
-    setUser(user);
-  }, [user]);
+  const { register, handleSubmit } = useForm<InputFormType>({
+    defaultValues: {
+      id: input.id,
+      name: input.name,
+    },
+  });
+
+  const onSubmit = handleSubmit((data: InputFormType) => {
+    
+    setInput((currentInput) => ({
+      ...currentInput,
+      ...{
+        id: data.id,
+        name: data.name,
+      },
+    }));
+    Router.push('/play');
+  });
 
   return (
-    <>
-      {!session ? (
-        <Auth />
-      ) : (
-        <>トップページ</>
-      )}
-    </>
-  )
-}
+    <div>
+      <form onSubmit={onSubmit}>
+        <div>
+          <label>
+            <span>id:</span>
+            <input type='text' {...register('id')} />
+          </label>
+        </div>
+        <div>
+          <label>
+            <span>name:</span>
+            <input type='text' {...register('name')} />
+          </label>
+        </div>
+        <div>
+          <button type="submit">confirm</button>
+        </div>
+      </form>
+    </div>
+  );
+};
 export default Home;

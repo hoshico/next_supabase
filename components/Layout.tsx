@@ -12,7 +12,6 @@ export default function Layout({ children, title="MLB SHOW"}: Props) {
     <>
       <div className="flex">
         <Sidebar />
-        <Main>{children}</Main>
       </div>
     </>
   )

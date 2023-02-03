@@ -1,10 +1,14 @@
 import Router from 'next/router';
 import { FormProvider, useForm } from 'react-hook-form';
+import { useRecoilValue } from 'recoil';
+import { inputState } from '../../states/atoms/inputAtom';
 import PositionSelect from './PositionSelect';
 import { uesFilter } from './useFilter';
 
 const Order = (props: any) => {
   const { players } = props;
+  const userInfo = useRecoilValue(inputState);
+  console.log(userInfo)
 
   /**
    * players情報から
