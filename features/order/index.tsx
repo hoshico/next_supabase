@@ -25,6 +25,13 @@ const Order = (props: any) => {
   });
   const { handleSubmit } = useFormMethods;
 
+  /**
+   * オーダー決定ボタン
+   * @param data 
+   * 
+   * recoil管理にして、決定したオーダーをページ遷移後も使用できるようにする
+   * 
+   */
   const onSubmit = (data: any) => {
     console.log(data);
     Router.push({
