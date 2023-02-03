@@ -1,4 +1,4 @@
-import { atom } from "recoil";
+import { atom } from 'recoil';
 
 export type InputFormType = {
   id: string | null;
@@ -6,9 +6,17 @@ export type InputFormType = {
 };
 
 export const inputState = atom<InputFormType>({
-  key: "input-login",
+  key: 'input-login',
   default: {
     id: null,
-    name: "",
-  }
-})
+    name: '',
+  },
+});
+
+export const playersState = atom({
+  key: 'players',
+  default: {
+    id: null,
+    selectedTeam: null,
+  },
+});
