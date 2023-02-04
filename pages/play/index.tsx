@@ -7,7 +7,7 @@ import Order from '../../features/order';
   最初にsupabaseから全てのデータを取得する
 */
 export const getStaticProps: GetStaticProps = async () => {
-  let { data: players } = await supabase.from('player').select('*');
+  let { data: players } = await supabase.from('players').select('*');
 
   return {
     props: {
