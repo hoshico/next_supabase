@@ -5,6 +5,11 @@ export type InputFormType = {
   name: string;
 };
 
+export type OrderType = {
+  userId: number | null;
+  selectedTeam: any[]| null;
+};
+
 export const inputState = atom<InputFormType>({
   key: 'input-login',
   default: {
@@ -13,10 +18,10 @@ export const inputState = atom<InputFormType>({
   },
 });
 
-export const playersState = atom({
+export const playersState = atom<OrderType>({
   key: 'players',
   default: {
-    id: null,
+    userId: null,
     selectedTeam: null,
   },
 });

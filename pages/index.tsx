@@ -15,7 +15,6 @@ const Home: NextPage = () => {
   });
 
   const onSubmit = handleSubmit((data: InputFormType) => {
-    
     setInput((currentInput) => ({
       ...currentInput,
       ...{
@@ -42,7 +41,7 @@ const Home: NextPage = () => {
           </label>
         </div>
         <div>
-          <button type="submit">confirm</button>
+          <button type='submit'>confirm</button>
         </div>
       </form>
     </div>
