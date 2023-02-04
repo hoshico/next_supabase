@@ -33,7 +33,10 @@ const TeamSelect2 = (props: any) => {
   
   return (
     <div className='mx-auto w-4/5 bg-gray-600'>
-     
+      <div>
+        <label htmlFor="dodgers">dodgers</label>
+        <input id="dodgers" type="radio" />
+      </div>
     </div>
   );
 };

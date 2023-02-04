@@ -21,6 +21,7 @@ interface Props {
 }
 
 const TeamPage: NextPage<Props> = (props) => {
+  console.log(props.players);
   return (
     <div className='to-black-600 h-screen bg-gradient-to-br from-yellow-500 via-yellow-700'>
       {/*<TeamSelect players={props.players}/>*/}
