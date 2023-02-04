@@ -1,5 +1,6 @@
 import { GetStaticProps, NextPage } from 'next';
 import TeamSelect from '../../features/team/TeamSelect';
+import TeamSelect2 from '../../features/team/TeamSelect2';
 import { supabase } from '../../libs/supabaseClient';
 
 /*
@@ -22,7 +23,8 @@ interface Props {
 const TeamPage: NextPage<Props> = (props) => {
   return (
     <div className='to-black-600 h-screen bg-gradient-to-br from-yellow-500 via-yellow-700'>
-      <TeamSelect players={props.players}/>
+      {/*<TeamSelect players={props.players}/>*/}
+      <TeamSelect2 players={props.players}/>
     </div>
   );
 };

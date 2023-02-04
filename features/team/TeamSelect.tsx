@@ -3,6 +3,10 @@ import { FormProvider, useForm } from 'react-hook-form';
 import { useRecoilState, useRecoilValue } from 'recoil';
 import { inputState, playersState } from '../../states/atoms/inputAtom';
 
+/**
+ * Team選択
+ * React-Hook-Form使用
+ */
 const TeamSelect = (props: any) => {
   const { players } = props;
   const [selectedPlayers, setSelectedPlayers] = useRecoilState(playersState);
