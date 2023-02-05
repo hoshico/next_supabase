@@ -1,13 +1,17 @@
-import { playersState } from '../../states/atoms/inputAtom';
-
 type Props = {
+  teamName: string;
   players: any[];
+  isSelected: boolean;
 };
 
 export const Card = (props: Props) => {
-  const { players } = props;
+  const { teamName, players, isSelected } = props;
   return (
-    <div className='card bg-base-100 shadow-xl w-full'>
+    <div
+      className={`card w-full bg-base-100 shadow-xl ${
+        isSelected && 'outline outline-2  outline-offset-2'
+      }`}
+    >
       <figure>
         <svg
           xmlns='http://www.w3.org/2000/svg'

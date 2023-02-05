@@ -1,7 +1,8 @@
 import Router from 'next/router';
+import { useState } from 'react';
 import { FormProvider, useForm } from 'react-hook-form';
 import { useRecoilState, useRecoilValue } from 'recoil';
-import { inputState, playersState } from '../../states/atoms/inputAtom';
+import { inputState, teamState } from '../../states/atoms/inputAtom';
 import { Card } from './Card';
 
 /**
@@ -10,7 +11,8 @@ import { Card } from './Card';
  */
 const TeamSelect2 = (props: any) => {
   const { players } = props;
-  const [selectedPlayers, setSelectedPlayers] = useRecoilState(playersState);
+  const [team, setTeam] = useState('');
+  const [selectedTeam, setSelectedTeam] = useRecoilState(teamState);
 
   let dodgersPlayers = [];
   let astrosPlayers = [];
@@ -30,12 +32,32 @@ const TeamSelect2 = (props: any) => {
       default:
     }
   }
-  
+  const onsubmit = () => {
+    console.log(team);
+  };
+
   return (
     <div className='mx-auto w-4/5'>
       <div className='grid grid-cols-2 gap-4'>
-        <Card players={dodgersPlayers}/>
-        <Card players={astrosPlayers}/>
+        <div onClick={() => setTeam('dodgers')}>
+          <Card
+            players={dodgersPlayers}
+            teamName='dodgers'
+            isSelected={team === 'dodgers'}
+          />
+        </div>
+        <div onClick={() => setTeam('astros')}>
+          <Card
+            players={astrosPlayers}
+            teamName='astros'
+            isSelected={team === 'astros'}
+          />
+        </div>
+      </div>
+      <div className='flex py-4'>
+        <button className='rounded-xl bg-gray-600 px-4 py-2' onClick={onsubmit}>
+          決定
+        </button>
       </div>
     </div>
   );

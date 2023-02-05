@@ -18,8 +18,8 @@ export const inputState = atom<InputFormType>({
   },
 });
 
-export const playersState = atom<OrderType>({
-  key: 'players',
+export const teamState = atom<OrderType>({
+  key: 'select-team',
   default: {
     userId: null,
     selectedTeam: null,
