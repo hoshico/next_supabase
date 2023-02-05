@@ -1,5 +1,4 @@
 import { GetStaticProps, NextPage } from 'next';
-import TeamSelect from '../../features/team/TeamSelect';
 import TeamSelect2 from '../../features/team/TeamSelect2';
 import { supabase } from '../../libs/supabaseClient';
 

@@ -2,7 +2,9 @@ import GameDetail from "../../features/game";
 
 const Game = () => {
   return(
-    <GameDetail />
+    <div className="bg-black h-screen">
+      <GameDetail />
+    </div>
   )
 };
 
