@@ -11,64 +11,24 @@ const GameDetail = () => {
   const [gameResult, setGameResult] = useState<number[]>([]);
 
   useEffect(() => {
-    if(!selectedTeam) {
-      router.push("/team");
+    if (!selectedTeam) {
+      router.push('/team');
     }
-    let awayTotalScore =
-      (score[0] as number) +
-      (score[2] as number) +
-      (score[4] as number) +
-      (score[6] as number) +
-      (score[8] as number) +
-      (score[10] as number) +
-      (score[12] as number) +
-      (score[14] as number) +
-      (score[16] as number);
-
-    let homeTotalScore =
-      (score[1] as number) +
-      (score[3] as number) +
-      (score[5] as number) +
-      (score[7] as number) +
-      (score[9] as number) +
-      (score[11] as number) +
-      (score[13] as number) +
-      (score[15] as number);
-
     if (score.length < 18) {
       const timer = setTimeout(() => {
         setScore([...score, Math.floor(Math.random() * 3)]);
       }, 100);
 
-      // 9回裏で負け確定
-      if (awayTotalScore < homeTotalScore) {
-        setScore([...score, 'X']);
-        return () => {
-          clearTimeout(timer);
-        };
-      }
-      // ９回裏まで
       return () => {
-        clearTimeout(timer);
+        clearInterval(timer);
       };
     }
-    // 9回表時点
-    if (score[17]) {
-      if (awayTotalScore < homeTotalScore) {
-        setReasult('負け');
-        setGameResult([awayTotalScore, homeTotalScore]);
-      }
-      // else if (awayTotalScore === homeTotalScore + (score[18] as number)) {
-      //  setReasult('引き分け');
-      //  setGameResult([awayTotalScore, homeTotalScore, (score[18]as number)]);
-      //} else {
-      //  setReasult('勝ち');
-      //  setGameResult([awayTotalScore, homeTotalScore, (score[18]as number)]);
-      //}
-    }
+    const awayScore = result.reduce((cur, res) => {
+      
+    },[])
   }, [score]);
 
-  console.log(gameResult)
+  console.log(gameResult);
 
   return (
     <div className='pt-12'>
