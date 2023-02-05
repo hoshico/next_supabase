@@ -8,8 +8,12 @@ const GameDetail = () => {
   const { userId, selectedTeam } = useRecoilValue(teamState);
   const [score, setScore] = useState<(number | string)[]>([]);
   const [result, setReasult] = useState('');
+  const [gameResult, setGameResult] = useState<number[]>([]);
 
   useEffect(() => {
+    if(!selectedTeam) {
+      router.push("/team");
+    }
     let awayTotalScore =
       (score[0] as number) +
       (score[2] as number) +
@@ -33,8 +37,7 @@ const GameDetail = () => {
 
     if (score.length < 18) {
       const timer = setTimeout(() => {
-        console.log('timer');
-        setScore([...score, 2]);
+        setScore([...score, Math.floor(Math.random() * 3)]);
       }, 100);
 
       // 9回裏で負け確定
@@ -49,22 +52,24 @@ const GameDetail = () => {
         clearTimeout(timer);
       };
     }
-    if(score[17]){
-      setReasult("引き分け")
+    // 9回表時点
+    if (score[17]) {
+      if (awayTotalScore < homeTotalScore) {
+        setReasult('負け');
+        setGameResult([awayTotalScore, homeTotalScore]);
+      }
+      // else if (awayTotalScore === homeTotalScore + (score[18] as number)) {
+      //  setReasult('引き分け');
+      //  setGameResult([awayTotalScore, homeTotalScore, (score[18]as number)]);
+      //} else {
+      //  setReasult('勝ち');
+      //  setGameResult([awayTotalScore, homeTotalScore, (score[18]as number)]);
+      //}
     }
   }, [score]);
 
-  if (!selectedTeam) {
-    return (
-      <>
-        <div>
-          <button type='button' onClick={() => router.push('team')}>
-            チーム選択に戻る
-          </button>
-        </div>
-      </>
-    );
-  }
+  console.log(gameResult)
+
   return (
     <div className='pt-12'>
       {/*scroe board*/}
@@ -153,6 +158,11 @@ const GameDetail = () => {
           </tbody>
         </table>
       </div>
+
+      <div>
+        {gameResult[0]}-{gameResult[1]}
+      </div>
+
       <div>{result}</div>
       {/*試合開始*/}
       {/*<div className='m-auto w-1/5 pt-6'>
