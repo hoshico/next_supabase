@@ -2,6 +2,7 @@ import Router from 'next/router';
 import { FormProvider, useForm } from 'react-hook-form';
 import { useRecoilState, useRecoilValue } from 'recoil';
 import { inputState, playersState } from '../../states/atoms/inputAtom';
+import { Card } from './Card';
 
 /**
  * Team選択
@@ -12,7 +13,7 @@ const TeamSelect2 = (props: any) => {
   const [selectedPlayers, setSelectedPlayers] = useRecoilState(playersState);
 
   let dodgersPlayers = [];
-  let giantsPlayers = [];
+  let astrosPlayers = [];
 
   /**
    * team_idでチーム振り分け
@@ -24,18 +25,17 @@ const TeamSelect2 = (props: any) => {
         dodgersPlayers.push(player);
         break;
       case 2:
-        giantsPlayers.push(player);
+        astrosPlayers.push(player);
         break;
       default:
     }
   }
-
   
   return (
-    <div className='mx-auto w-4/5 bg-gray-600'>
-      <div>
-        <label htmlFor="dodgers">dodgers</label>
-        <input id="dodgers" type="radio" />
+    <div className='mx-auto w-4/5'>
+      <div className='grid grid-cols-2 gap-4'>
+        <Card players={dodgersPlayers}/>
+        <Card players={astrosPlayers}/>
       </div>
     </div>
   );
