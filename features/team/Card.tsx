@@ -1,20 +1,24 @@
+import { ReactNode } from 'react';
+
 type Props = {
   teamName: string;
   players: any[];
   isSelected: boolean;
+  svg: ReactNode;
 };
 
 export const Card = (props: Props) => {
-  const { teamName, players, isSelected } = props;
+  const { teamName, players, isSelected, svg } = props;
   return (
     <div
       className={`card w-full bg-base-100 shadow-xl ${
         isSelected && 'outline outline-4  outline-offset-2'
       }`}
     >
-      <div className="pt-6">
+      <div className='pt-6'>
         <figure>
-          <svg
+          {svg}
+          {/*<svg
             xmlns='http://www.w3.org/2000/svg'
             height='103'
             width='102.6'
@@ -63,7 +67,7 @@ export const Card = (props: Props) => {
                 d='m154.23 94.817v-11.457l-2.912 2.927v6.46l-9.033 3.238v46.55l2.928-2.038v-42.452m9.017 45.692-2.912 2.028v6.49h-26.912l-2.923 2.93h32.748m-51.641-28.57h27.93l2.92-2.93h-33.768v18.86l2.918-2.048v-5.117m9.028 11.178v-2.82l-2.912 2.027v6.49h-26.924l-2.906 2.93h32.742m-20.792-59.2-9.043-3.24-2.896 2.072 9.034 3.228m36.485-5.299-2.923 2.07 9.034 3.23 2.924-2.06m-21.823-1.169v-11.457l-2.912 2.927v6.46l-9.034 3.238v18.86l2.918-2.906v-13.895'
               />
             </g>
-          </svg>
+          </svg>*/}
         </figure>
       </div>
       <div className='card-body'>

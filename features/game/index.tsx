@@ -45,7 +45,7 @@ const GameDetail = () => {
       if (score.length < 17) {
         setScore([...score, Math.floor(Math.random() * 3)]);
       }
-    }, 100);
+    }, 1000);
     if (score.length > 17) {
       console.log('cleanInterval');
       return () => {
