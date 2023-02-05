@@ -32,14 +32,15 @@ const TeamSelect2 = (props: any) => {
     }
   }
   const onsubmit = () => {
-    console.log(team);
     setSelectedTeam((current) => ({
       ...current,
       ...{
         userId: 1,
         selectedTeam: team,
       }
-    }))
+    }));
+    Router.push('/game');
+    
   };
 
   return (
