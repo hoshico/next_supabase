@@ -1,6 +1,5 @@
 import Router from 'next/router';
 import { useState } from 'react';
-import { FormProvider, useForm } from 'react-hook-form';
 import { useRecoilState, useRecoilValue } from 'recoil';
 import { inputState, teamState } from '../../states/atoms/inputAtom';
 import { Card } from './Card';
@@ -11,7 +10,7 @@ import { Card } from './Card';
  */
 const TeamSelect2 = (props: any) => {
   const { players } = props;
-  const [team, setTeam] = useState('');
+  const [team, setTeam] = useState("dodgers");
   const [selectedTeam, setSelectedTeam] = useRecoilState(teamState);
 
   let dodgersPlayers = [];
@@ -34,10 +33,17 @@ const TeamSelect2 = (props: any) => {
   }
   const onsubmit = () => {
     console.log(team);
+    setSelectedTeam((current) => ({
+      ...current,
+      ...{
+        userId: 1,
+        selectedTeam: team,
+      }
+    }))
   };
 
   return (
-    <div className='mx-auto w-4/5'>
+    <div className='mx-auto w-4/5 pt-4'>
       <div className='grid grid-cols-2 gap-4'>
         <div onClick={() => setTeam('dodgers')}>
           <Card

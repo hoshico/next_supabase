@@ -1,7 +1,7 @@
 import Router from 'next/router';
 import { FormProvider, useForm } from 'react-hook-form';
 import { useRecoilState, useRecoilValue } from 'recoil';
-import { inputState, playersState } from '../../states/atoms/inputAtom';
+import { inputState, teamState } from '../../states/atoms/inputAtom';
 
 /**
  * Team選択
@@ -9,7 +9,7 @@ import { inputState, playersState } from '../../states/atoms/inputAtom';
  */
 const TeamSelect = (props: any) => {
   const { players } = props;
-  const [selectedPlayers, setSelectedPlayers] = useRecoilState(playersState);
+  const [selectedPlayers, setSelectedPlayers] = useRecoilState(teamState);
 
   let dodgersPlayers = [];
   let giantsPlayers = [];
@@ -49,7 +49,7 @@ const TeamSelect = (props: any) => {
    *
    */
   const onSubmit = (data: any) => {
-    setSelectedPlayers((current) => ({
+    setSelectedPlayers((current: any) => ({
       ...current,
       ...{
         userId: 1,

@@ -7,7 +7,7 @@ export type InputFormType = {
 
 export type OrderType = {
   userId: number | null;
-  selectedTeam: any[]| null;
+  selectedTeam: string | null;
 };
 
 export const inputState = atom<InputFormType>({
