@@ -1,17 +1,18 @@
 import { useRouter } from 'next/router';
 import { useEffect, useState } from 'react';
-import { useRecoilValue } from 'recoil';
+import { useRecoilState, useRecoilValue } from 'recoil';
 import { teamAtom } from '../../states/atoms/inputAtom';
 
 const GameDetail = () => {
   const router = useRouter();
-  const { userId, selectedTeam } = useRecoilValue(teamAtom);
+  const [{ id, teamName, teamEnglishName }, setTeam] = useRecoilState(teamAtom);
   const [score, setScore] = useState<any[]>([]);
   const [result, setReasult] = useState('');
   const [gameResult, setGameResult] = useState<number[]>([]);
 
   useEffect(() => {
-    if (!selectedTeam) {
+    console.log("teamname情報: ", teamName)
+    if (!id) {
       router.push('/team');
     }
 
@@ -52,7 +53,7 @@ const GameDetail = () => {
         clearInterval(timer);
       };
     }
-  }, [score]);
+  }, []);
 
   return (
     <div className='pt-12'>
@@ -77,7 +78,7 @@ const GameDetail = () => {
           <tbody>
             <tr className='border'>
               <td data-th='Team'>
-                <span className='long'>{selectedTeam}</span>
+                <span className='long'>{teamEnglishName}</span>
               </td>
               <td className='border' data-th='1st'>
                 {score[0]}
@@ -143,8 +144,10 @@ const GameDetail = () => {
         </table>
       </div>
 
-      <div className='pt-4 mx-auto w-3/5'>
-        {gameResult.length > 1 && <p className='text-3xl'>{`${gameResult[0]}-${gameResult[1]}`}</p>}
+      <div className='mx-auto w-3/5 pt-4'>
+        {gameResult.length > 1 && (
+          <p className='text-3xl'>{`${gameResult[0]}-${gameResult[1]}`}</p>
+        )}
         <p className='text-3xl'>{result}</p>
       </div>
 

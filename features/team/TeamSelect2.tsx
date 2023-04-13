@@ -10,7 +10,11 @@ import { Card } from './Card';
  */
 const TeamSelect2 = (props: any) => {
   const { players } = props;
-  const [team, setTeam] = useState('dodgers');
+  const [team, setTeam] = useState<{
+    id: number;
+    teamName: string;
+    teamEnglishName: string;
+  }>({ id: 1, teamName: 'ドジャース', teamEnglishName: 'Dodgers' });
   const [selectedTeam, setSelectedTeam] = useRecoilState(teamAtom);
 
   let dodgersPlayers = [];
@@ -32,24 +36,26 @@ const TeamSelect2 = (props: any) => {
     }
   }
   const onsubmit = () => {
-    setSelectedTeam((current) => ({
-      ...current,
-      ...{
-        userId: 1,
-        selectedTeam: team,
-      },
-    }));
+    setSelectedTeam(team);
     Router.push('/game');
   };
 
   return (
     <div className='mx-auto w-4/5 pt-4'>
       <div className='grid grid-cols-2 gap-4'>
-        <div onClick={() => setTeam('dodgers')}>
+        <div
+          onClick={() =>
+            setTeam({
+              id: 1,
+              teamName: 'ドジャース',
+              teamEnglishName: 'Dodgers',
+            })
+          }
+        >
           <Card
             players={dodgersPlayers}
             teamName='dodgers'
-            isSelected={team === 'dodgers'}
+            isSelected={team.id === 1}
             svg={
               <svg
                 xmlns='http://www.w3.org/2000/svg'
@@ -90,11 +96,19 @@ const TeamSelect2 = (props: any) => {
             }
           />
         </div>
-        <div onClick={() => setTeam('astros')}>
+        <div
+          onClick={() =>
+            setTeam({
+              id: 2,
+              teamName: 'アストロズ',
+              teamEnglishName: 'Astros',
+            })
+          }
+        >
           <Card
             players={astrosPlayers}
             teamName='astros'
-            isSelected={team === 'astros'}
+            isSelected={team.id === 2}
             svg={
               <svg
                 xmlns='http://www.w3.org/2000/svg'
