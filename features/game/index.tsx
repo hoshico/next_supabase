@@ -1,11 +1,11 @@
 import { useRouter } from 'next/router';
 import { useEffect, useState } from 'react';
 import { useRecoilValue } from 'recoil';
-import { teamState } from '../../states/atoms/inputAtom';
+import { teamAtom } from '../../states/atoms/inputAtom';
 
 const GameDetail = () => {
   const router = useRouter();
-  const { userId, selectedTeam } = useRecoilValue(teamState);
+  const { userId, selectedTeam } = useRecoilValue(teamAtom);
   const [score, setScore] = useState<any[]>([]);
   const [result, setReasult] = useState('');
   const [gameResult, setGameResult] = useState<number[]>([]);

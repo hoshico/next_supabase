@@ -1,3 +1,4 @@
+import { LargeNumberLike } from 'crypto';
 import { atom } from 'recoil';
 
 export type InputFormType = {
@@ -6,8 +7,9 @@ export type InputFormType = {
 };
 
 export type OrderType = {
-  userId: number | null;
-  selectedTeam: string | null;
+  id: number | null;
+  teamName: string | null;
+  teamEnglishName: string | null;
 };
 
 export const inputState = atom<InputFormType>({
@@ -18,10 +20,11 @@ export const inputState = atom<InputFormType>({
   },
 });
 
-export const teamState = atom<OrderType>({
+export const teamAtom = atom<OrderType>({
   key: 'select-team',
   default: {
-    userId: null,
-    selectedTeam: null,
+    id: null,
+    teamName: null,
+    teamEnglishName: null,
   },
 });

@@ -1,7 +1,7 @@
 import Router from 'next/router';
 import { useState } from 'react';
 import { useRecoilState, useRecoilValue } from 'recoil';
-import { inputState, teamState } from '../../states/atoms/inputAtom';
+import { inputState, teamAtom } from '../../states/atoms/inputAtom';
 import { Card } from './Card';
 
 /**
@@ -11,7 +11,7 @@ import { Card } from './Card';
 const TeamSelect2 = (props: any) => {
   const { players } = props;
   const [team, setTeam] = useState('dodgers');
-  const [selectedTeam, setSelectedTeam] = useRecoilState(teamState);
+  const [selectedTeam, setSelectedTeam] = useRecoilState(teamAtom);
 
   let dodgersPlayers = [];
   let astrosPlayers = [];
