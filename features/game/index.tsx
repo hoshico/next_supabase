@@ -5,13 +5,13 @@ import { teamAtom } from '../../states/atoms/inputAtom';
 
 const GameDetail = () => {
   const router = useRouter();
-  const [{ id, teamName, teamEnglishName }, setTeam] = useRecoilState(teamAtom);
+  const { id, teamName, teamEnglishName } = useRecoilValue(teamAtom);
   const [score, setScore] = useState<any[]>([]);
   const [result, setReasult] = useState('');
   const [gameResult, setGameResult] = useState<number[]>([]);
 
   useEffect(() => {
-    console.log("teamname情報: ", teamName)
+    console.log('teamname情報: ', teamName);
     if (!id) {
       router.push('/team');
     }
