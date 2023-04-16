@@ -22,6 +22,7 @@ const GameDetail = () => {
 
       // 9回表で場合分け
       if (score.length === 17) {
+        console.log(score)
         for (let i = 0; i < 17; i++) {
           if (i % 2 === 0) {
             awayScore += score[i];
