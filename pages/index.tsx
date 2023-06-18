@@ -3,7 +3,7 @@ import Router from 'next/router';
 
 const Home: NextPage = () => {
   const onStart = () => {
-    Router.push('/play');
+    Router.push('/select');
   };
 
   return (

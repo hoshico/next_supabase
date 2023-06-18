@@ -1,5 +1,7 @@
+import { SelectPlayers } from '../../features/select/SelectPlayers';
+
 const SelectPage = () => {
-  return <Select />;
+  return <SelectPlayers />;
 };
 
 export default SelectPage;
