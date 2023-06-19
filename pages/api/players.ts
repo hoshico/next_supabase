@@ -1,5 +1,6 @@
 import { NextApiRequest, NextApiResponse } from 'next';
 import { supabase } from '../../libs/supabaseClient';
+import { Player } from '../../features/common/types';
 
 const plyaersApi = async (_: NextApiRequest, res: NextApiResponse) => {
   let { data, error } = await supabase.from('players').select('*');
