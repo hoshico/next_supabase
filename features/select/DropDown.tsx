@@ -6,6 +6,7 @@ type Props = {
 
 export const DropDown = (props: Props) => {
   const { players } = props;
+  console.log(players)
 
   if (!players) return <></>;
   return (

@@ -1,4 +1,4 @@
-import { FormProvider, useForm } from 'react-hook-form';
+import { Controller, FormProvider, useForm } from 'react-hook-form';
 import useSWR from 'swr';
 import { DropDown } from './DropDown';
 import { Player } from '../common/types';
@@ -85,7 +85,7 @@ export const SelectPlayers = () => {
       {/* 選手選択画面 */}
       <FormProvider {...useFormMethods}>
         <form className='mt-4' onSubmit={handleSubmit(onSubmit)}>
-          {/* <DropDown players={} /> */}
+          
           <button type='submit'>確定</button>
         </form>
       </FormProvider>
